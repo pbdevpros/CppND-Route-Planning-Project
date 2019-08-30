@@ -58,7 +58,19 @@ int main(int argc, const char **argv)
     RouteModel model{osm_data};
 
     // Perform search and render results.
-    RoutePlanner route_planner{model, 10, 10, 90, 90};
+    float x1, y1, x2, y2;
+    std::cout << "\nEnter the co-ordinates of your desired location!" ;
+    std::cout << "\nEnter the x co-ordinate for the start location : [ 0 - 100] ";
+    std::cin >> x1;
+    std::cout << "\nEnter the y co-ordinate for the start location : [ 0 - 100] ";
+    std::cin >> y1;
+    std::cout << "\nEnter the x co-ordinate for the end location : [ 0 - 100] ";
+    std::cin >> x2;
+    std::cout << "\nEnter the y co-ordinate for the end location : [ 0 - 100] ";
+    std::cin >> y2;
+    RoutePlanner route_planner{model, x1, y1, x2, y2};
+    route_planner.AStarSearch();
+    std::cout << "Distance : " << route_planner.GetDistance() << " \n" ;
     Render render{model};
 
     auto display = io2d::output_surface{400, 400, io2d::format::argb32, io2d::scaling::none, io2d::refresh_style::fixed, 30};
